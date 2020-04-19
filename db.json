@@ -1,0 +1,56 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Blue Shirt",
+      "description": "Soft, Cotton Nice looking Shirt",
+      "price": "10",
+      "inStock": "5",
+      "seller": "Sam Smith"
+    },
+    {
+      "id": 2,
+      "name": "Green Pants",
+      "description": "Very ugly and funny looking green pants",
+      "price": "15",
+      "inStock": "2",
+      "seller": "Sam Smith"
+    },
+    {
+      "id": 3,
+      "name": "Red Bikini",
+      "description": "Very Sexy Looking Bikini",
+      "price": "20",
+      "inStock": "7",
+      "seller": "Kim Khorn"
+    },
+    {
+      "id": 4,
+      "name": "Yellow Hat",
+      "description": "Looks cool in the summer",
+      "price": "3",
+      "inStock": "10",
+      "seller": "Kim Khorn"
+    },
+    {
+      "name": "Purple Shoes",
+      "description": "Looks like barney the dinosaur is on your feet",
+      "price": "15",
+      "inStock": "1",
+      "seller": "Kim Khorn",
+      "id": 5
+    }
+  ],
+  "sellers": [
+    {
+      "id": 1,
+      "firstName": "Sam Smith",
+      "rating": "4"
+    },
+    {
+      "id": 2,
+      "name": "Kim Khorn",
+      "rating": "5"
+    }
+  ]
+}
