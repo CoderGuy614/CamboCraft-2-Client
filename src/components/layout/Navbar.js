@@ -1,26 +1,29 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <Fragment>
       <nav>
-        <div className="nav-wrapper">
-          <a
+        <div className="nav-wrapper blue lighten-2">
+          <Link
             style={{ paddingLeft: "10px" }}
-            href="#!"
+            to="/"
             className="brand-logo left"
           >
-            <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+            <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
               <i className="material-icons">menu</i>
-            </a>
+            </Link>
             Online Store
-          </a>
+          </Link>
           <ul className="right hide-on-med-and-down">
             <li>
-              <a href="about.html">About Us</a>
+              <Link to="/about">
+                <i className="material-icons left">info</i>About Us
+              </Link>
             </li>
             <li>
-              <a href="cart.html">
+              <a className="modal-trigger" href="#CartModal">
                 <i className="material-icons left">shopping_cart</i>Shopping
                 Cart
               </a>
@@ -31,12 +34,19 @@ const Navbar = () => {
 
       <ul className="sidenav" id="mobile-demo">
         <li>
-          <a href="about.html">About Us</a>
+          <Link to="/">
+            <i className="material-icons left">store</i>Shop
+          </Link>
         </li>
         <li>
-          <a href="cart.html">
+          <Link to="/about">
+            <i className="material-icons left">info</i>About Us
+          </Link>
+        </li>
+        <li>
+          <Link to="/cart">
             <i className="material-icons left">shopping_cart</i>Shopping Cart
-          </a>
+          </Link>
         </li>
       </ul>
     </Fragment>

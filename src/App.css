@@ -1,0 +1,27 @@
+.box {
+  background: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.card-title {
+  background-color: rgba(32, 216, 63, 0.8);
+
+  border-radius: 10px;
+  padding: 5px !important;
+}
+
+.info {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-btn {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.add-to-cart {
+  width: 100%;
+}
