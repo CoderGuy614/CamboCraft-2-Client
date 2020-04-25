@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-
+import "materialize-css/dist/css/materialize.min.css";
+import M from "materialize-css/dist/js/materialize.min.js";
 const Navbar = () => {
   return (
     <Fragment>
@@ -11,7 +12,7 @@ const Navbar = () => {
             to="/"
             className="brand-logo left"
           >
-            <Link to="#" data-target="mobile-demo" className="sidenav-trigger">
+            <Link to="#" data-target="mobile-nav" className="button-collapse">
               <i className="material-icons">menu</i>
             </Link>
             Online Store
@@ -32,7 +33,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <ul className="sidenav" id="mobile-demo">
+      <ul className="sidenav" id="mobile-nav">
         <li>
           <Link to="/">
             <i className="material-icons left">store</i>Shop

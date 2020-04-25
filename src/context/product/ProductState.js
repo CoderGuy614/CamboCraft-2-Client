@@ -11,12 +11,15 @@ import {
   DELETE_PRODUCT,
   PRODUCT_ERROR,
   SET_CART_ITEMS,
+  SET_CART_OPTIONS,
+  UPDATE_CART_OPTIONS,
   SET_LOADING,
 } from "../types";
 
 const ProductState = (props) => {
   const initialState = {
     cartProducts: [],
+    filteredOptions: [],
     loading: false,
     products: null,
     current: null,
@@ -79,6 +82,36 @@ const ProductState = (props) => {
     }
   };
 
+  const setCartOptions = (id, optionIndex) => {
+    try {
+      const objectToSend = { id: id, optionIndex: optionIndex };
+
+      dispatch({
+        type: SET_CART_OPTIONS,
+        payload: objectToSend,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
+
+  const updateCartOptions = (id) => {
+    try {
+      dispatch({
+        type: UPDATE_CART_OPTIONS,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
+
   // Set loading to true
   const setLoading = () => {
     return {
@@ -95,9 +128,12 @@ const ProductState = (props) => {
         error: state.error,
         loading: state.loading,
         cartProducts: state.cartProducts,
+        filteredOptions: state.filteredOptions,
         getProducts,
         getProduct,
         setCartItems,
+        setCartOptions,
+        updateCartOptions,
         setLoading,
       }}
     >

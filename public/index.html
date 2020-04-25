@@ -13,14 +13,27 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <script
-      src="https://code.jquery.com/jquery-3.5.0.min.js"
-      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-      crossorigin="anonymous"
-    ></script>
     <title>Online Store</title>
   </head>
   <body>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("#CartModal").modal({
+          dismissible: false,
+        });
+        //Init scrollspy
+        $(".scrollspy").scrollSpy();
+      });
+
+      $(document).ready(function () {
+        $(".sidenav").sidenav();
+      });
+    </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>

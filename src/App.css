@@ -25,3 +25,8 @@
 .add-to-cart {
   width: 100%;
 }
+
+#CartModal {
+  max-height: 85%;
+  /* overflow: visible; */
+}

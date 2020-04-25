@@ -19,9 +19,6 @@ import AlertState from "./context/alert/AlertState";
 import CartModal from "./components/layout/CartModal";
 
 const App = () => {
-  useEffect(() => {
-    M.AutoInit();
-  });
   return (
     <AuthState>
       <ProductState>

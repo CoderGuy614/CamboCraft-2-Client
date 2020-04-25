@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import M from "materialize-css/dist/js/materialize.min.js";
 const ProductCard = ({ product }) => {
-  useEffect(() => {
-    M.AutoInit();
-  });
   return (
     <Fragment>
       <div className="card small">
