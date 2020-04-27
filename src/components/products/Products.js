@@ -16,7 +16,6 @@ const Products = () => {
   if (loading) {
     return <PreLoader />;
   }
-
   return (
     <>
       <div className="fixed-action-btn">

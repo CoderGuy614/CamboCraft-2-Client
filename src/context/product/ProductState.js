@@ -13,13 +13,17 @@ import {
   SET_CART_ITEMS,
   SET_CART_OPTIONS,
   UPDATE_CART_OPTIONS,
+  GET_TOTAL_PRICE,
   SET_LOADING,
+  PLACE_ORDER,
+  SEND_CONFIRMATION,
 } from "../types";
 
 const ProductState = (props) => {
   const initialState = {
     cartProducts: [],
     filteredOptions: [],
+    totalPrice: 0,
     loading: false,
     products: null,
     current: null,
@@ -112,6 +116,51 @@ const ProductState = (props) => {
     }
   };
 
+  const getTotalPrice = () => {
+    try {
+      dispatch({
+        type: GET_TOTAL_PRICE,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
+
+  const placeOrder = async (formData) => {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    try {
+      const res = await axios.post("/orders", formData, config);
+      dispatch({
+        type: PLACE_ORDER,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
+
+  const sendConfirmation = async (formData) => {
+    try {
+      const res = await axios.post("/confirmation", formData);
+      dispatch({
+        type: SEND_CONFIRMATION,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
   // Set loading to true
   const setLoading = () => {
     return {
@@ -129,12 +178,16 @@ const ProductState = (props) => {
         loading: state.loading,
         cartProducts: state.cartProducts,
         filteredOptions: state.filteredOptions,
+        totalPrice: state.totalPrice,
         getProducts,
         getProduct,
         setCartItems,
         setCartOptions,
         updateCartOptions,
+        getTotalPrice,
         setLoading,
+        placeOrder,
+        sendConfirmation,
       }}
     >
       {props.children}

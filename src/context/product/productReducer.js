@@ -8,7 +8,10 @@ import {
   SET_CART_ITEMS,
   SET_CART_OPTIONS,
   UPDATE_CART_OPTIONS,
+  GET_TOTAL_PRICE,
   SET_LOADING,
+  PLACE_ORDER,
+  SEND_CONFIRMATION,
 } from "../types";
 
 export default (state, action) => {
@@ -45,11 +48,7 @@ export default (state, action) => {
       let testVar = state.filteredOptions.find((obj) =>
         obj.id === newFilteredOption[0].id ? newFilteredOption[0].id : false
       );
-      //REPLACE
-      // state.filteredOptions.filter((obj) => obj.id !== testVar);
-      // TestVar true means that item id is already in state.filteredOptions
-      // Need to replace the filteredOptions object that id in the filteredOptions array with the new value
-      console.log(testVar);
+
       let filtered;
       if (testVar === undefined) {
         return {
@@ -68,23 +67,41 @@ export default (state, action) => {
       }
 
     case UPDATE_CART_OPTIONS:
-      let foids = state.filteredOptions.map((o) => o.id);
-      console.log(action.payload);
-      console.log("foids", foids);
-
-      let newFoids = state.filteredOptions.filter(
-        (o) => o.id !== action.payload
-      );
-
       return {
         ...state,
-        filteredOptions: [newFoids],
+        filteredOptions: state.filteredOptions.filter(
+          (o) => o.id !== action.payload
+        ),
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case GET_TOTAL_PRICE:
+      return {
+        ...state,
+        totalPrice: state.filteredOptions
+          .map((obj) => Number(obj.price))
+          .reduce((a, b) => a + b),
+      };
+    case SEND_CONFIRMATION:
+      return {
+        ...state,
+        messageSent: true,
       };
 
     case SET_LOADING:
       return {
         ...state,
         loading: true,
+      };
+
+    case PLACE_ORDER:
+      return {
+        ...state,
+        orderSent: true,
       };
     default:
       return state;

@@ -1,24 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import ProductContext from "../../context/product/productContext";
+import axios from "axios";
 
 const CartModal = () => {
   const productContext = useContext(ProductContext);
   const {
-    products,
-    getProducts,
     cartProducts,
+    filteredOptions,
     setLoading,
     loading,
     setCartItems,
     setCartOptions,
     updateCartOptions,
+    totalPrice,
+    getTotalPrice,
+    placeOrder,
+    sendConfirmation,
   } = productContext;
 
   useEffect(() => {
     setCartItems();
     //eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    setOrder({
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      message: "",
+    });
+  }, []);
+
+  // Delete a Cart Item Handler Function
   const removeItem = (index) => {
     if (cartProducts.length <= 1) {
       M.toast({ html: "Cart must have at least 1 item" });
@@ -27,41 +43,61 @@ const CartModal = () => {
       let existing = localStorage.getItem("id");
       let array = existing.split(",");
       let targetId = array[index];
+
       array.splice(index, 1).join();
       localStorage.setItem("id", array);
 
       setCartItems();
       updateCartOptions(targetId);
-      //Update the context state for the filteredOptions after deleting an item
-
+      getTotalPrice();
       M.toast({ html: "Removed item" });
     }
   };
 
-  const [shopper, setShopper] = useState({
+  const [order, setOrder] = useState({
     name: "",
     email: "",
     phone: "",
     location: "",
+    message: "",
   });
-  const { name, email, phone, location } = shopper;
+  const { name, email, phone, location, message } = order;
   const [checkedButton, setCheckedButton] = useState({});
 
-  // const initialValue = { itemName: "", itemId: "", option: "", price: 0 };
-  const initialValue = {};
-  const [items, setItems] = useState([]);
-
   const onInputChange = (e) =>
-    setShopper({ ...shopper, [e.target.name]: e.target.value });
+    setOrder({ ...order, [e.target.name]: e.target.value });
 
-  const onPriceChange = (i, option, product, index1) => {
-    // if the existing state contains a key with the same cart index, update the object at that index.  Otherwise, add a new object to the array
-
+  const onPriceChange = (i, product, index1) => {
     setCartOptions(product._id, i);
-
     setCheckedButton({ ...checkedButton, [index1]: i });
+    getTotalPrice();
   };
 
+  const resetForm = () => {
+    setOrder({
+      name: "",
+      message: "",
+      email: "",
+      phone: "",
+      location: "",
+      //Add in a field for button text to change to sent
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      name,
+      email,
+      phone,
+      location,
+      message,
+      cartProducts,
+      filteredOptions,
+    };
+    placeOrder(formData);
+    sendConfirmation(formData);
+  };
   return (
     <>
       <div id="CartModal" className="modal">
@@ -79,10 +115,8 @@ const CartModal = () => {
                     <p key={i}>
                       <label htmlor={i}>
                         <input
-                          onChange={() =>
-                            onPriceChange(i, option, product, index1)
-                          }
-                          checked={checkedButton[index1] == i ? true : false}
+                          onChange={() => onPriceChange(i, product, index1)}
+                          checked={checkedButton[index1] === i ? true : false}
                           type="radio"
                         />
                         <span>
@@ -107,41 +141,66 @@ const CartModal = () => {
           {/* //Put total price Here  */}
 
           <h5>
-            Total Order Price<span className="right">${}</span>
+            Total Order Price<span className="right">${totalPrice}</span>
           </h5>
         </div>
         {/* Cart Contents */}
+
         <div className="card-panel grey lighten-3">
-          <h5>Order Details</h5>
-          <div className="input-field">
-            <input type="text" placeholder="Name" id="name" />
-            <label htmlFor="name">Name</label>
-          </div>
-          <div className="input-field">
-            <input type="email" placeholder="Email" id="email" />
-            <label htmlFor="name">Email</label>
-          </div>
-          <div className="input-field">
-            <input type="text" placeholder="Phone" id="phone" />
-            <label htmlFor="name">Phone</label>
-          </div>
-          <div className="input-field">
-            <textarea
-              className="materialize-textarea"
-              placeholder="Delivery Location"
-              id="location"
-            ></textarea>
-            <label htmlFor="location">Delivery Location</label>
-          </div>
-          <div className="input-field">
-            <textarea
-              className="materialize-textarea"
-              placeholder="Special Requests"
-              id="message"
-            ></textarea>
-            <label htmlFor="message">Special Requests</label>
-          </div>
-          <input type="submit" value="submit" className="btn" />
+          <form onSubmit={onSubmit}>
+            <h5>Order Details</h5>
+            <div className="input-field">
+              <input
+                onChange={onInputChange}
+                type="text"
+                placeholder="Name"
+                id="name"
+                name="name"
+              />
+              <label htmlFor="name">Name</label>
+            </div>
+            <div className="input-field">
+              <input
+                onChange={onInputChange}
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email"
+              />
+              <label htmlFor="name">Email</label>
+            </div>
+            <div className="input-field">
+              <input
+                onChange={onInputChange}
+                type="text"
+                placeholder="Phone"
+                id="phone"
+                name="phone"
+              />
+              <label htmlFor="name">Phone</label>
+            </div>
+            <div className="input-field">
+              <textarea
+                className="materialize-textarea"
+                placeholder="Delivery Location"
+                id="location"
+                name="location"
+                onChange={onInputChange}
+              ></textarea>
+              <label htmlFor="location">Delivery Location</label>
+            </div>
+            <div className="input-field">
+              <textarea
+                className="materialize-textarea"
+                placeholder="Special Requests"
+                id="message"
+                name="message"
+                onChange={onInputChange}
+              ></textarea>
+              <label htmlFor="message">Special Requests</label>
+            </div>
+            <input type="submit" value="submit" className="btn" />
+          </form>
         </div>
 
         {/* //Modal Footer  */}
