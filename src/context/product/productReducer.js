@@ -12,6 +12,7 @@ import {
   SET_LOADING,
   PLACE_ORDER,
   SEND_CONFIRMATION,
+  CLEAR_FORM_DATA,
 } from "../types";
 
 export default (state, action) => {
@@ -103,6 +104,11 @@ export default (state, action) => {
         ...state,
         error: null,
         orderSent: action.payload.status === 200 ? true : false,
+      };
+
+    case CLEAR_FORM_DATA:
+      return {
+        ...state,
         cartProducts: [],
         filteredOptions: [],
         totalPrice: 0,

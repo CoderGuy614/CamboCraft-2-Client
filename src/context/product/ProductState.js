@@ -17,6 +17,7 @@ import {
   SET_LOADING,
   PLACE_ORDER,
   SEND_CONFIRMATION,
+  CLEAR_FORM_DATA,
 } from "../types";
 
 const ProductState = (props) => {
@@ -166,6 +167,19 @@ const ProductState = (props) => {
     }
   };
 
+  const clearFormData = () => {
+    try {
+      dispatch({
+        type: CLEAR_FORM_DATA,
+      });
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: err,
+      });
+    }
+  };
+
   // Set loading to true
   const setLoading = () => {
     return {
@@ -194,6 +208,7 @@ const ProductState = (props) => {
         setLoading,
         placeOrder,
         sendConfirmation,
+        clearFormData,
       }}
     >
       {props.children}

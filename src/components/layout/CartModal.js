@@ -18,6 +18,7 @@ const CartModal = () => {
     sendConfirmation,
     error,
     orderSent,
+    clearFormData,
   } = productContext;
 
   useEffect(() => {
@@ -29,21 +30,12 @@ const CartModal = () => {
   useEffect(() => {
     setSuccess(orderSent);
     if (orderSent) {
+      setOrder({ buttonText: "Order Sent!" });
       notifySent();
       sendConfirmation(formData);
+      clearFormData();
     }
   }, [orderSent]);
-
-  useEffect(() => {
-    setOrder({
-      name: "",
-      email: "",
-      phone: "",
-      location: "",
-      message: "",
-      buttonText: "Submit",
-    });
-  }, []);
 
   // Delete a Cart Item Handler Function
   const removeItem = (index) => {
@@ -71,7 +63,7 @@ const CartModal = () => {
     phone: "",
     location: "",
     message: "",
-    buttonText: "",
+    buttonText: "Submit Order",
   });
   const { name, email, phone, location, message, buttonText } = order;
   const [checkedButton, setCheckedButton] = useState({});
@@ -95,17 +87,6 @@ const CartModal = () => {
     setCheckedButton({ ...checkedButton, [index1]: i });
     getTotalPrice();
   };
-
-  // const resetForm = () => {
-  //   setOrder({
-  //     name: "",
-  //     message: "",
-  //     email: "",
-  //     phone: "",
-  //     location: "",
-  //     buttonText: "Order Sent!",
-  //   });
-  // };
 
   const notifySent = () => {
     setTimeout(

@@ -24,3 +24,4 @@ export const REMOVE_ALERT = "REMOVE_ALERT";
 export const SET_LOADING = "SET_LOADING";
 export const PLACE_ORDER = "PLACE_ORDER";
 export const SEND_CONFIRMATION = "SEND_CONFIRMATION";
+export const CLEAR_FORM_DATA = "CLEAR_FORM_DATA";
