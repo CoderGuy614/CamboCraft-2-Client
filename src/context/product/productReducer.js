@@ -101,7 +101,16 @@ export default (state, action) => {
     case PLACE_ORDER:
       return {
         ...state,
+        error: null,
         orderSent: true,
+        cartProducts: [],
+        filteredOptions: [],
+        totalPrice: 0,
+      };
+    case PRODUCT_ERROR:
+      return {
+        ...state,
+        error: action.payload.response.data,
       };
     default:
       return state;

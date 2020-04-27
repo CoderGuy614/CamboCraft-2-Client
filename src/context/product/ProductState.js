@@ -28,7 +28,8 @@ const ProductState = (props) => {
     products: null,
     current: null,
     filtered: null,
-    errror: null,
+    error: null,
+    orderSent: false,
   };
 
   const [state, dispatch] = useReducer(productReducer, initialState);
@@ -148,8 +149,11 @@ const ProductState = (props) => {
   };
 
   const sendConfirmation = async (formData) => {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
     try {
-      const res = await axios.post("/confirmation", formData);
+      const res = await axios.post("/confirmation", formData, config);
       dispatch({
         type: SEND_CONFIRMATION,
         payload: res.data,

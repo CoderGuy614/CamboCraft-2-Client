@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import ProductContext from "../../context/product/productContext";
-import axios from "axios";
 
 const CartModal = () => {
   const productContext = useContext(ProductContext);
@@ -17,6 +16,8 @@ const CartModal = () => {
     getTotalPrice,
     placeOrder,
     sendConfirmation,
+    error,
+    orderSent,
   } = productContext;
 
   useEffect(() => {
@@ -31,6 +32,8 @@ const CartModal = () => {
       phone: "",
       location: "",
       message: "",
+      success: false,
+      buttonText: "Submit",
     });
   }, []);
 
@@ -60,8 +63,10 @@ const CartModal = () => {
     phone: "",
     location: "",
     message: "",
+    success: false,
+    buttonText: "",
   });
-  const { name, email, phone, location, message } = order;
+  const { name, email, phone, location, message, success, buttonText } = order;
   const [checkedButton, setCheckedButton] = useState({});
 
   const onInputChange = (e) =>
@@ -80,8 +85,16 @@ const CartModal = () => {
       email: "",
       phone: "",
       location: "",
-      //Add in a field for button text to change to sent
+      success: true,
+      buttonText: "Order Sent!",
     });
+  };
+
+  const notifySent = () => {
+    setTimeout(
+      () => M.toast({ html: "Confirmation Email has Been Sent" }),
+      3000
+    );
   };
 
   const onSubmit = (e) => {
@@ -95,15 +108,16 @@ const CartModal = () => {
       cartProducts,
       filteredOptions,
     };
-    placeOrder(formData);
+    console.log(formData);
     sendConfirmation(formData);
+    placeOrder(formData);
   };
+
   return (
     <>
       <div id="CartModal" className="modal">
         <div className="modal-content">
           <h4>Shopping Cart</h4>
-
           <ul className="collection">
             {cartProducts.map((product, index1) => (
               <li key={index1} className="collection-item avatar">
@@ -138,69 +152,102 @@ const CartModal = () => {
               </li>
             ))}
           </ul>
-          {/* //Put total price Here  */}
-
-          <h5>
-            Total Order Price<span className="right">${totalPrice}</span>
-          </h5>
         </div>
         {/* Cart Contents */}
 
-        <div className="card-panel grey lighten-3">
-          <form onSubmit={onSubmit}>
-            <h5>Order Details</h5>
-            <div className="input-field">
-              <input
-                onChange={onInputChange}
-                type="text"
-                placeholder="Name"
-                id="name"
-                name="name"
-              />
-              <label htmlFor="name">Name</label>
+        {!success && (
+          <>
+            <div className="container">
+              <h5 className="grey lighten-3">
+                Total Order Price<span className="right">${totalPrice}</span>
+              </h5>
             </div>
-            <div className="input-field">
-              <input
-                onChange={onInputChange}
-                type="email"
-                placeholder="Email"
-                id="email"
-                name="email"
-              />
-              <label htmlFor="name">Email</label>
+            <div className="card-panel grey lighten-3">
+              <form onSubmit={onSubmit}>
+                <h5>Order Details</h5>
+                <div className="input-field">
+                  <input
+                    onChange={onInputChange}
+                    type="text"
+                    placeholder="Name"
+                    id="name"
+                    name="name"
+                  />
+                  <label htmlFor="name">Name</label>
+                </div>
+                <div className="input-field">
+                  <input
+                    onChange={onInputChange}
+                    type="email"
+                    placeholder="Email"
+                    id="email"
+                    name="email"
+                  />
+                  <label htmlFor="name">Email</label>
+                </div>
+                <div className="input-field">
+                  <input
+                    onChange={onInputChange}
+                    type="text"
+                    placeholder="Phone"
+                    id="phone"
+                    name="phone"
+                  />
+                  <label htmlFor="name">Phone</label>
+                </div>
+                <div className="input-field">
+                  <textarea
+                    className="materialize-textarea"
+                    placeholder="Delivery Location"
+                    id="location"
+                    name="location"
+                    onChange={onInputChange}
+                  ></textarea>
+                  <label htmlFor="location">Delivery Location</label>
+                </div>
+                <div className="input-field">
+                  <textarea
+                    className="materialize-textarea"
+                    placeholder="Special Requests"
+                    id="message"
+                    name="message"
+                    onChange={onInputChange}
+                  ></textarea>
+                  <label htmlFor="message">Special Requests</label>
+                </div>
+
+                {/* <div className="errors">
+                  {error && (
+                    <ul>
+                      {error.errors.map((err, index) => (
+                        <li key={index} className="red-text">
+                          {err.msg}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div> */}
+                <input
+                  type="submit"
+                  value={buttonText}
+                  className={success ? "btn disabled" : "btn"}
+                />
+              </form>
             </div>
-            <div className="input-field">
-              <input
-                onChange={onInputChange}
-                type="text"
-                placeholder="Phone"
-                id="phone"
-                name="phone"
-              />
-              <label htmlFor="name">Phone</label>
-            </div>
-            <div className="input-field">
-              <textarea
-                className="materialize-textarea"
-                placeholder="Delivery Location"
-                id="location"
-                name="location"
-                onChange={onInputChange}
-              ></textarea>
-              <label htmlFor="location">Delivery Location</label>
-            </div>
-            <div className="input-field">
-              <textarea
-                className="materialize-textarea"
-                placeholder="Special Requests"
-                id="message"
-                name="message"
-                onChange={onInputChange}
-              ></textarea>
-              <label htmlFor="message">Special Requests</label>
-            </div>
-            <input type="submit" value="submit" className="btn" />
-          </form>
+          </>
+        )}
+        <div className="container">
+          <div className="success">
+            {success && (
+              <>
+                <p className="green-text">
+                  {" "}
+                  Success! Thank you for shopping with us!
+                </p>
+                <a className="btn disabled">{buttonText}</a>
+              </>
+            )}
+          </div>
         </div>
 
         {/* //Modal Footer  */}
