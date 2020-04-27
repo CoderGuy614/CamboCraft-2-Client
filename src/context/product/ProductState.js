@@ -138,7 +138,7 @@ const ProductState = (props) => {
       const res = await axios.post("/orders", formData, config);
       dispatch({
         type: PLACE_ORDER,
-        payload: res.data,
+        payload: { data: res.data, status: res.status },
       });
     } catch (err) {
       dispatch({
@@ -165,6 +165,7 @@ const ProductState = (props) => {
       });
     }
   };
+
   // Set loading to true
   const setLoading = () => {
     return {
@@ -183,6 +184,7 @@ const ProductState = (props) => {
         cartProducts: state.cartProducts,
         filteredOptions: state.filteredOptions,
         totalPrice: state.totalPrice,
+        orderSent: state.orderSent,
         getProducts,
         getProduct,
         setCartItems,

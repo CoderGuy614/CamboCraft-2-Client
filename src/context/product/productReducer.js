@@ -102,7 +102,7 @@ export default (state, action) => {
       return {
         ...state,
         error: null,
-        orderSent: true,
+        orderSent: action.payload.status === 200 ? true : false,
         cartProducts: [],
         filteredOptions: [],
         totalPrice: 0,

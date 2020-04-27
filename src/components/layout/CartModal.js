@@ -25,6 +25,15 @@ const CartModal = () => {
     //eslint-disable-next-line
   }, []);
 
+  const [success, setSuccess] = useState(false);
+  useEffect(() => {
+    setSuccess(orderSent);
+    if (orderSent) {
+      notifySent();
+      sendConfirmation(formData);
+    }
+  }, [orderSent]);
+
   useEffect(() => {
     setOrder({
       name: "",
@@ -32,7 +41,6 @@ const CartModal = () => {
       phone: "",
       location: "",
       message: "",
-      success: false,
       buttonText: "Submit",
     });
   }, []);
@@ -63,11 +71,21 @@ const CartModal = () => {
     phone: "",
     location: "",
     message: "",
-    success: false,
     buttonText: "",
   });
-  const { name, email, phone, location, message, success, buttonText } = order;
+  const { name, email, phone, location, message, buttonText } = order;
   const [checkedButton, setCheckedButton] = useState({});
+
+  const formData = {
+    name,
+    email,
+    phone,
+    location,
+    message,
+    cartProducts,
+    filteredOptions,
+    totalPrice,
+  };
 
   const onInputChange = (e) =>
     setOrder({ ...order, [e.target.name]: e.target.value });
@@ -78,17 +96,16 @@ const CartModal = () => {
     getTotalPrice();
   };
 
-  const resetForm = () => {
-    setOrder({
-      name: "",
-      message: "",
-      email: "",
-      phone: "",
-      location: "",
-      success: true,
-      buttonText: "Order Sent!",
-    });
-  };
+  // const resetForm = () => {
+  //   setOrder({
+  //     name: "",
+  //     message: "",
+  //     email: "",
+  //     phone: "",
+  //     location: "",
+  //     buttonText: "Order Sent!",
+  //   });
+  // };
 
   const notifySent = () => {
     setTimeout(
@@ -99,17 +116,6 @@ const CartModal = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formData = {
-      name,
-      email,
-      phone,
-      location,
-      message,
-      cartProducts,
-      filteredOptions,
-    };
-    console.log(formData);
-    sendConfirmation(formData);
     placeOrder(formData);
   };
 
@@ -216,7 +222,7 @@ const CartModal = () => {
                   <label htmlFor="message">Special Requests</label>
                 </div>
 
-                {/* <div className="errors">
+                <div className="errors">
                   {error && (
                     <ul>
                       {error.errors.map((err, index) => (
@@ -226,7 +232,7 @@ const CartModal = () => {
                       ))}
                     </ul>
                   )}
-                </div> */}
+                </div>
                 <input
                   type="submit"
                   value={buttonText}
