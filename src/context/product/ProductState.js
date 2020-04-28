@@ -41,7 +41,7 @@ const ProductState = (props) => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("/products");
+      const res = await axios.get(`${process.env.REACT_APP_API}/products`);
       dispatch({
         type: GET_PRODUCTS,
         payload: res.data,
@@ -56,7 +56,9 @@ const ProductState = (props) => {
 
   const getProduct = async (id) => {
     try {
-      const res = await axios.get(`/products/${id}`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API}/products/${id}`
+      );
       dispatch({
         type: GET_PRODUCT,
         payload: res.data,
@@ -72,7 +74,7 @@ const ProductState = (props) => {
   const setCartItems = async () => {
     try {
       setLoading();
-      const res = await axios.get("/products");
+      const res = await axios.get(`${process.env.REACT_APP_API}/products`);
       let ids = localStorage.getItem("id").split(",");
       let result = [];
       ids.forEach((id) => {
@@ -138,7 +140,11 @@ const ProductState = (props) => {
       headers: { "Content-Type": "application/json" },
     };
     try {
-      const res = await axios.post("/orders", formData, config);
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/orders`,
+        formData,
+        config
+      );
       dispatch({
         type: PLACE_ORDER,
         payload: { data: res.data, status: res.status },
@@ -156,7 +162,11 @@ const ProductState = (props) => {
       headers: { "Content-Type": "application/json" },
     };
     try {
-      const res = await axios.post("/confirmation", formData, config);
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/confirmation`,
+        formData,
+        config
+      );
       dispatch({
         type: SEND_CONFIRMATION,
         payload: res.data,
