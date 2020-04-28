@@ -41,7 +41,7 @@ const ProductState = (props) => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/products`);
+      const res = await axios.get(`${process.env.REACT_APP_API}products`);
       dispatch({
         type: GET_PRODUCTS,
         payload: res.data,
