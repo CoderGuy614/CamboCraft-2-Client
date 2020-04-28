@@ -1,10 +1,8 @@
 import {
   GET_PRODUCTS,
   GET_PRODUCT,
-  ADD_PRODUCT,
-  UPDATE_PRODUCT,
-  DELETE_PRODUCT,
   PRODUCT_ERROR,
+  OTHER_ERROR,
   SET_CART_ITEMS,
   SET_CART_OPTIONS,
   UPDATE_CART_OPTIONS,
@@ -83,9 +81,12 @@ export default (state, action) => {
     case GET_TOTAL_PRICE:
       return {
         ...state,
-        totalPrice: state.filteredOptions
-          .map((obj) => Number(obj.price))
-          .reduce((a, b) => a + b),
+        totalPrice:
+          state.filteredOptions.length > 0
+            ? state.filteredOptions
+                .map((obj) => Number(obj.price))
+                .reduce((a, b) => a + b)
+            : 0,
       };
     case SEND_CONFIRMATION:
       return {
@@ -117,6 +118,11 @@ export default (state, action) => {
       return {
         ...state,
         error: action.payload.response.data,
+      };
+    case OTHER_ERROR:
+      return {
+        ...state,
+        otherError: action.payload,
       };
     default:
       return state;

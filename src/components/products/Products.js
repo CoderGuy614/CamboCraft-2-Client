@@ -18,11 +18,11 @@ const Products = () => {
   }
   return (
     <>
-      <div className="fixed-action-btn">
+      {/* <div className="fixed-action-btn">
         <a href="/addnew" className="btn-floating btn-large red">
           <i className="large material-icons">add</i>
         </a>
-      </div>
+      </div> */}
       <div className="card-container">
         <div className="row">
           {!loading &&

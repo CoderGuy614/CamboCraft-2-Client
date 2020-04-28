@@ -10,6 +10,7 @@ import {
   UPDATE_PRODUCT,
   DELETE_PRODUCT,
   PRODUCT_ERROR,
+  OTHER_ERROR,
   SET_CART_ITEMS,
   SET_CART_OPTIONS,
   UPDATE_CART_OPTIONS,
@@ -30,6 +31,7 @@ const ProductState = (props) => {
     current: null,
     filtered: null,
     error: null,
+    otherError: null,
     orderSent: false,
   };
 
@@ -46,7 +48,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -61,7 +63,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -82,7 +84,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -98,7 +100,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -112,7 +114,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -125,7 +127,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -161,7 +163,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -174,7 +176,7 @@ const ProductState = (props) => {
       });
     } catch (err) {
       dispatch({
-        type: PRODUCT_ERROR,
+        type: OTHER_ERROR,
         payload: err,
       });
     }
@@ -194,6 +196,7 @@ const ProductState = (props) => {
         current: state.current,
         filtered: state.filtered,
         error: state.error,
+        otherError: state.otherError,
         loading: state.loading,
         cartProducts: state.cartProducts,
         filteredOptions: state.filteredOptions,

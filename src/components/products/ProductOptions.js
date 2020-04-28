@@ -34,7 +34,7 @@ const ProductOptions = (props) => {
         {props.options.map((item, index) => {
           return (
             <li key={index} className="collection-item avatar">
-              <i className="material-icons circle blue lighten-2">
+              <i className="material-icons circle white red-text lighten-2">
                 favorite_border
               </i>
               <span className="title">{item.name}</span>

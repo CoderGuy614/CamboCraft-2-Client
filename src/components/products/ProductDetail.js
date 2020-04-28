@@ -12,7 +12,6 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     getProduct(props.match.params.id);
-
     //eslint-disable-next-line
   }, []);
 
@@ -27,39 +26,34 @@ const ProductDetail = (props) => {
       <>
         <a
           href="/"
-          className="back-btn waves-effect waves-light btn-small grey lighten-1 black-text"
+          className="back-btn waves-effect waves-light btn-small teal lighten-1 white-text"
         >
           <i className="material-icons left">home</i>Back to Products
         </a>
+
         <div className="row">
           <div className="col s12">
-            <div className="box">
-              {" "}
-              This div is 12-columns wide on all screen sizes
+            <div class="col s12 m4 center teal-text contact-icons">
+              <i className="material-icons medium">store</i>
+              <p>Now In Stock: {current.inStock}</p>
+            </div>
+            <div class="col s12 m4 center teal-text contact-icons">
+              <i className="material-icons medium">access_alarm</i>
+              <p>Custom Orders: Ready in 48 - 72 hours</p>
+            </div>
+            <div class="col s12 m4 center teal-text contact-icons">
+              <i className="material-icons medium">local_shipping</i>
+              <p>Free delivery in Siem Reap + Try Before You Buy</p>
             </div>
           </div>
+        </div>
 
+        <div className="row">
           <div className="col s12 m6">
             <div className="box">
               <h4>{current.name}</h4>
 
-              <div className="info">
-                <ul className="collection">
-                  <li className="collection-item grey lighten-1 black-text">
-                    <i className="material-icons left">access_alarm</i>
-                    Custom Orders: 48 Hours
-                  </li>
-                  <li className="collection-item grey lighten-2 black-text">
-                    <i className="material-icons left">store</i> In Stock:{" "}
-                    {current.inStock}
-                  </li>
-
-                  <li className="collection-item grey lighten-3 black-text">
-                    <i className="material-icons left">local_shipping</i>
-                    Free Delivery (Siem Reap)
-                  </li>
-                </ul>
-              </div>
+              <div className="info"></div>
               <Slider photos={current.photos} />
             </div>
           </div>

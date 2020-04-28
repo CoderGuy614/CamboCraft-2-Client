@@ -3,10 +3,7 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
 import "./App.css";
 import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css/dist/js/materialize.min.js";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Cart from "./pages/Cart";
 import AddNew from "./pages/AddNew";
 import ProductDetail from "./components/products/ProductDetail";
 import Navbar from "./components/layout/Navbar";
@@ -29,8 +26,6 @@ const App = () => {
               <CartModal />
               <Switch>
                 <Route path="/product/:id" component={ProductDetail} />
-                <Route path="/about" render={About} />
-                <Route path="/cart" render={Cart} />
                 <Route path="/addnew" render={AddNew} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />

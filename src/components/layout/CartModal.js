@@ -7,8 +7,6 @@ const CartModal = () => {
   const {
     cartProducts,
     filteredOptions,
-    setLoading,
-    loading,
     setCartItems,
     setCartOptions,
     updateCartOptions,
@@ -27,6 +25,7 @@ const CartModal = () => {
   }, []);
 
   const [success, setSuccess] = useState(false);
+
   useEffect(() => {
     setSuccess(orderSent);
     if (orderSent) {
@@ -34,6 +33,8 @@ const CartModal = () => {
       notifySent();
       sendConfirmation(formData);
       clearFormData();
+      localStorage.removeItem("id");
+      setTimeout(() => setSuccess(false), 3500);
     }
   }, [orderSent]);
 

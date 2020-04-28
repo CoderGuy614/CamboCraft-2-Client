@@ -5,10 +5,32 @@
 }
 
 .card-title {
-  background-color: rgba(32, 216, 63, 0.8);
-
+  background-color: rgb(38, 166, 154, 0.8);
+  font-size: 16px;
   border-radius: 10px;
   padding: 5px !important;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.card-content {
+  text-transform: uppercase;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-image {
+  height: 215px;
+  overflow: hidden;
+}
+
+.card-link {
+  font-size: 16px;
+}
+
+.card-action {
+  height: 50px;
 }
 
 .info {
@@ -24,6 +46,9 @@
 
 .add-to-cart {
   width: 100%;
+}
+.contact-icons {
+  margin-top: 25px;
 }
 
 #CartModal {
