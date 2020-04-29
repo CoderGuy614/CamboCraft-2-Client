@@ -19,23 +19,18 @@ const Navbar = () => {
             <Link to="#" data-target="mobile-nav" className="sidenav-trigger">
               <i className="material-icons">menu</i>
             </Link>
-            Online Store
+            CamboCraft Store
           </Link>
 
-          <Link
+          <a
             style={{ paddingLeft: "10px" }}
-            to="/"
-            className="brand-logo right hide-on-med-and-up"
+            href="#CartModal"
+            className="brand-logo modal-trigger right hide-on-med-and-up"
           >
             <i className="material-icons">shopping_cart</i>
-          </Link>
+          </a>
 
-          <ul className="right hide-on-med-and-down">
-            {/* <li>
-              <Link to="/about">
-                <i className="material-icons left">info</i>About Us
-              </Link>
-            </li> */}
+          <ul className="right hide-on-small-only">
             <li>
               <a className="modal-trigger" href="#CartModal">
                 <i className="material-icons left">shopping_cart</i>Shopping
@@ -48,20 +43,26 @@ const Navbar = () => {
 
       <ul className="sidenav" id="mobile-nav">
         <li>
-          <Link to="/">
-            <i className="material-icons left">store</i>Shop
-          </Link>
+          <a href="https://coderguy614.github.io/CamboCraftLandingPage/">
+            <i className="material-icons left">home</i>Home
+          </a>
+        </li>
+        <li>
+          <a href="https://coderguy614.github.io/CamboCraftLandingPage/#gallery">
+            <i className="material-icons left">camera_alt</i>Gallery
+          </a>
+        </li>
+        <li>
+          <a href="https://coderguy614.github.io/CamboCraftLandingPage/#contact">
+            <i className="material-icons left">call</i>Contact
+          </a>
         </li>
         {/* <li>
-          <Link to="/about">
-            <i className="material-icons left">info</i>About Us
-          </Link>
+          <a href="#CartModal">
+            <i className="material-icons left modal-trigger">shopping_cart</i>
+            Shopping Cart
+          </a>
         </li> */}
-        <li>
-          <Link to="/cart">
-            <i className="material-icons left">shopping_cart</i>Shopping Cart
-          </Link>
-        </li>
       </ul>
     </Fragment>
   );

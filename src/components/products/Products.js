@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import PreLoader from "../layout/PreLoader";
+import Footer from "../layout/Footer";
 import ProductContext from "../../context/product/productContext";
 
 const Products = () => {
@@ -34,6 +35,7 @@ const Products = () => {
             ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };
