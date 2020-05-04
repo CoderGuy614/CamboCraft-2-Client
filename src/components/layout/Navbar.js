@@ -14,12 +14,12 @@ const Navbar = () => {
           <Link
             style={{ paddingLeft: "10px" }}
             to="/"
-            className="brand-logo left hide-on-small-only"
+            className="brand-logo left"
           >
             <Link to="#" data-target="mobile-nav" className="sidenav-trigger">
               <i className="material-icons">menu</i>
             </Link>
-            CamboCraft Store
+            Shop
           </Link>
 
           <a
