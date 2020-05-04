@@ -48,6 +48,9 @@ const ProductOptions = (props) => {
         Add To Cart
         <i className="material-icons">shopping_cart</i>
       </a>
+      <p className="center">
+        <em>You can specify options in the shopping cart</em>
+      </p>
     </div>
   );
 };

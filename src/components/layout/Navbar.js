@@ -43,17 +43,17 @@ const Navbar = () => {
 
       <ul className="sidenav" id="mobile-nav">
         <li>
-          <a href="https://coderguy614.github.io/CamboCraftLandingPage/">
+          <a href="https://coderguy614.github.io/CamboCraft/">
             <i className="material-icons left">home</i>Home
           </a>
         </li>
         <li>
-          <a href="https://coderguy614.github.io/CamboCraftLandingPage/#gallery">
+          <a href="https://coderguy614.github.io/CamboCraft/#gallery">
             <i className="material-icons left">camera_alt</i>Gallery
           </a>
         </li>
         <li>
-          <a href="https://coderguy614.github.io/CamboCraftLandingPage/#contact">
+          <a href="https://coderguy614.github.io/CamboCraft/#contact">
             <i className="material-icons left">call</i>Contact
           </a>
         </li>

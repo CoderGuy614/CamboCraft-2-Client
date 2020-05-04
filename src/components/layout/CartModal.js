@@ -207,11 +207,12 @@ const CartModal = () => {
                 <div className="errors">
                   {error && (
                     <ul>
-                      {error.errors.map((err, index) => (
-                        <li key={index} className="red-text">
-                          {err.msg}
-                        </li>
-                      ))}
+                      {error.errors &&
+                        error.errors.map((err, index) => (
+                          <li key={index} className="red-text">
+                            {err.msg}
+                          </li>
+                        ))}
                     </ul>
                   )}
                 </div>

@@ -33,15 +33,15 @@ const ProductDetail = (props) => {
 
         <div className="row">
           <div className="col s12">
-            <div class="col s12 m4 center teal-text contact-icons">
+            <div className="col s12 m4 center teal-text contact-icons">
               <i className="material-icons medium">store</i>
               <p>Now In Stock: {current.inStock}</p>
             </div>
-            <div class="col s12 m4 center teal-text contact-icons">
+            <div className="col s12 m4 center teal-text contact-icons">
               <i className="material-icons medium">access_alarm</i>
               <p>Custom Orders: Ready in 48 - 72 hours</p>
             </div>
-            <div class="col s12 m4 center teal-text contact-icons">
+            <div className="col s12 m4 center teal-text contact-icons">
               <i className="material-icons medium">local_shipping</i>
               <p>Free delivery in Siem Reap + Try Before You Buy</p>
             </div>
