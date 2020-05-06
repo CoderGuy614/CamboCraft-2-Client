@@ -7,7 +7,7 @@ export default class SkirtColor extends Component {
     return (
       <svg
         id="Capa_1"
-        enable-background="new 0 0 503.651 503.651"
+        enableBackground="new 0 0 503.651 503.651"
         height={size}
         viewBox="0 0 503.651 503.651"
         width={size}
