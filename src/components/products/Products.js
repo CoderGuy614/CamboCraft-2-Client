@@ -7,7 +7,13 @@ import ProductContext from "../../context/product/productContext";
 const Products = () => {
   const productContext = useContext(ProductContext);
 
-  const { products, getProducts, loading } = productContext;
+  const {
+    products,
+    getProducts,
+    loading,
+    filteredCategories,
+    filteredProducts,
+  } = productContext;
 
   useEffect(() => {
     getProducts();
@@ -19,16 +25,20 @@ const Products = () => {
   }
   return (
     <>
-      {/* <div className="fixed-action-btn">
-        <a href="/addnew" className="btn-floating btn-large red">
-          <i className="large material-icons">add</i>
-        </a>
-      </div> */}
       <div className="card-container">
         <div className="row">
           {!loading &&
             products !== null &&
+            filteredProducts.length === 0 &&
             products.map((product) => (
+              <div key={product._id} className="col s12 m6 l4">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          {!loading &&
+            products !== null &&
+            filteredProducts.length > 0 &&
+            filteredProducts.map((product) => (
               <div key={product._id} className="col s12 m6 l4">
                 <ProductCard product={product} />
               </div>

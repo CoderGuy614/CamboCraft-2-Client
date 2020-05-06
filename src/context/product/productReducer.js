@@ -11,6 +11,8 @@ import {
   PLACE_ORDER,
   SEND_CONFIRMATION,
   CLEAR_FORM_DATA,
+  TOGGLE_FILTER,
+  APPLY_FILTERS,
 } from "../types";
 
 export default (state, action) => {
@@ -124,6 +126,35 @@ export default (state, action) => {
         ...state,
         otherError: action.payload,
       };
+
+    case TOGGLE_FILTER:
+      if (state.filteredCategories.includes(action.payload)) {
+        return {
+          ...state,
+          filteredCategories: state.filteredCategories.filter(
+            (e) => e !== action.payload
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          filteredCategories: [action.payload, ...state.filteredCategories],
+        };
+      }
+
+    case APPLY_FILTERS:
+      let result = state.products.filter((el) => {
+        for (let i = 0; i < state.filteredCategories.length; i++) {
+          if (state.filteredCategories[i] === el.category) {
+            return true;
+          }
+        }
+      });
+      return {
+        ...state,
+        filteredProducts: result,
+      };
+
     default:
       return state;
   }

@@ -19,6 +19,8 @@ import {
   PLACE_ORDER,
   SEND_CONFIRMATION,
   CLEAR_FORM_DATA,
+  TOGGLE_FILTER,
+  APPLY_FILTERS,
 } from "../types";
 
 const ProductState = (props) => {
@@ -29,7 +31,8 @@ const ProductState = (props) => {
     loading: false,
     products: null,
     current: null,
-    filtered: null,
+    filteredProducts: [],
+    filteredCategories: [],
     error: null,
     otherError: null,
     orderSent: false,
@@ -83,6 +86,19 @@ const ProductState = (props) => {
       dispatch({
         type: SET_CART_ITEMS,
         payload: result,
+      });
+    } catch (err) {
+      dispatch({
+        type: OTHER_ERROR,
+        payload: err,
+      });
+    }
+  };
+
+  const applyFilters = () => {
+    try {
+      dispatch({
+        type: APPLY_FILTERS,
       });
     } catch (err) {
       dispatch({
@@ -192,6 +208,20 @@ const ProductState = (props) => {
     }
   };
 
+  const toggleFilter = (cat) => {
+    try {
+      dispatch({
+        type: TOGGLE_FILTER,
+        payload: cat,
+      });
+    } catch (err) {
+      dispatch({
+        type: OTHER_ERROR,
+        payload: err,
+      });
+    }
+  };
+
   // Set loading to true
   const setLoading = () => {
     return {
@@ -204,7 +234,8 @@ const ProductState = (props) => {
       value={{
         products: state.products,
         current: state.current,
-        filtered: state.filtered,
+        filteredProducts: state.filteredProducts,
+        filteredCategories: state.filteredCategories,
         error: state.error,
         otherError: state.otherError,
         loading: state.loading,
@@ -222,6 +253,8 @@ const ProductState = (props) => {
         placeOrder,
         sendConfirmation,
         clearFormData,
+        toggleFilter,
+        applyFilters,
       }}
     >
       {props.children}
